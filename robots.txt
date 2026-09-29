@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://noel-en-famille.onrender.com/sitemap.xml
+Sitemap: https://noel-famille.onrender.com/sitemap.xml
