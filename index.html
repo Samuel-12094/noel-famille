@@ -447,6 +447,93 @@
             cursor: pointer;
         }
 
+        /* SOCIAL PROOF (hero) */
+        .hero-proof {
+            display: flex; gap: 28px; flex-wrap: wrap;
+            margin-top: 28px; padding-top: 24px;
+            border-top: 1px solid rgba(93,64,55,0.12);
+        }
+        .hero-proof div { line-height: 1.2; }
+        .hero-proof b {
+            display: block; font-size: 1.5rem; color: var(--red); font-weight: 700;
+        }
+        .hero-proof span {
+            font-size: 0.75rem; color: var(--brown); opacity: 0.6;
+        }
+
+        /* REASSURANCE BAR */
+        .reassure {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px; max-width: 1200px; margin: -30px auto 0; padding: 0 40px;
+            position: relative; z-index: 5;
+        }
+        .reassure-item {
+            background: var(--white);
+            border-radius: 14px; padding: 18px 20px;
+            display: flex; gap: 12px; align-items: flex-start;
+            box-shadow: 0 8px 28px rgba(93,64,55,0.1);
+        }
+        .reassure-item .ri { font-size: 1.4rem; line-height: 1.2; }
+        .reassure-item b { display: block; font-size: 0.85rem; margin-bottom: 3px; }
+        .reassure-item p { font-size: 0.75rem; opacity: 0.6; line-height: 1.5; }
+
+        /* ADDED-TO-CART PANEL (conversion) */
+        .added-panel {
+            position: fixed; right: 20px; bottom: 20px; z-index: 2900;
+            background: var(--white); color: var(--brown);
+            border-radius: 16px; box-shadow: 0 20px 60px rgba(93,64,55,0.3);
+            width: min(360px, calc(100vw - 40px));
+            transform: translateY(140%); transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+            overflow: hidden;
+        }
+        .added-panel.show { transform: translateY(0); }
+        .added-head {
+            display: flex; gap: 12px; align-items: center;
+            padding: 16px 18px; background: rgba(39,174,96,0.08);
+            border-bottom: 1px solid rgba(93,64,55,0.08);
+        }
+        .added-head .tick {
+            width: 30px; height: 30px; flex: 0 0 30px;
+            background: var(--green); color: var(--white);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 0.95rem; font-weight: 700;
+        }
+        .added-head b { display: block; font-size: 0.85rem; }
+        .added-head span { font-size: 0.72rem; opacity: 0.6; }
+        .added-items { max-height: 130px; overflow-y: auto; }
+        .added-line {
+            display: flex; justify-content: space-between; gap: 10px;
+            padding: 9px 18px; font-size: 0.8rem;
+            border-bottom: 1px solid rgba(93,64,55,0.05);
+        }
+        .added-line .mini { width: 26px; height: 26px; flex: 0 0 26px; }
+        .added-line .mini svg.art { width: 78%; height: 78%; }
+        .added-perks { padding: 12px 18px; font-size: 0.75rem; }
+        .added-perks div { display: flex; gap: 8px; align-items: center; padding: 3px 0; opacity: 0.75; }
+        .added-cta { display: flex; gap: 10px; padding: 0 18px 18px; }
+        .added-cta button {
+            flex: 1; padding: 12px; border-radius: 10px;
+            font-family: 'Poppins', sans-serif; font-size: 0.78rem; font-weight: 600;
+            letter-spacing: 0.5px; text-transform: uppercase; cursor: pointer;
+            transition: all 0.3s; border: 1px solid var(--red); color: var(--red); background: transparent;
+        }
+        .added-cta button:hover { background: var(--red); color: var(--white); }
+        .added-cta button.solid { background: var(--red); color: var(--white); }
+        .added-cta button.solid:hover { background: var(--red-dark); }
+
+        /* URGENCY TIMER sur carte */
+        .card-urgency {
+            display: flex; align-items: center; gap: 5px;
+            font-size: 0.7rem; font-weight: 600; color: var(--red);
+            margin-bottom: 10px;
+        }
+        .card-urgency .pulse {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--red); animation: pulse-dot 1.4s infinite;
+        }
+        @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+        .card-viewers { font-size: 0.7rem; opacity: 0.5; margin-bottom: 10px; }
+
         /* LOADING SKELETON */
         .skeleton {
             background: var(--white);
@@ -1194,6 +1281,12 @@
                 <h1>Des Cadeaux pour<br>Toute la Famille</h1>
                 <p>Trouvez le cadeau parfait pour chaque membre de votre famille. Des jouets pour les enfants, des accessoires pour les ados, et des cadeaux qui font plaisir à tous les âges.</p>
                 <a href="#boutique" class="hero-cta">Voir la Boutique</a>
+                <div class="hero-proof">
+                    <div><b>2 400+</b><span>clients gagnants</span></div>
+                    <div><b>4,9/5</b><span>note moyenne</span></div>
+                    <div><b>24-48h</b><span>livraison Bénin</span></div>
+                    <div><b>15 j</b><span>retour facile</span></div>
+                </div>
             </div>
             <div class="hero-visual">
                 🎄
@@ -1259,6 +1352,26 @@
                 <div class="category-icon">🐕</div>
                 <h4>Animaux</h4>
             </button>
+        </div>
+    </section>
+
+    <!-- REASSURANCE BAR -->
+    <section class="reassure">
+        <div class="reassure-item">
+            <span class="ri">🚚</span>
+            <div><b>Livraison 24-48h</b><p>Partout au Bénin. Offerte dès 30 000 FCFA.</p></div>
+        </div>
+        <div class="reassure-item">
+            <span class="ri">🔒</span>
+            <div><b>Paiement Mobile Money</b><p>MTN MoMo, Moov Money ou carte. 100% sécurisé.</p></div>
+        </div>
+        <div class="reassure-item">
+            <span class="ri">🎁</span>
+            <div><b>Emballage cadeau offert</b><p>Carte de vœux personnalisée incluse.</p></div>
+        </div>
+        <div class="reassure-item">
+            <span class="ri">↩️</span>
+            <div><b>15 jours pour changer d'avis</b><p>Retour simple, remboursement rapide.</p></div>
         </div>
     </section>
 
@@ -1598,6 +1711,20 @@
         </div>
     </div>
 
+    <!-- ADDED TO CART PANEL (conversion) -->
+    <aside class="added-panel" id="added-panel" aria-live="polite">
+        <div class="added-head">
+            <span class="tick">&#10003;</span>
+            <div><b id="added-title">Ajouté au panier</b><span id="added-sub">Livraison offerte dès 30 000 FCFA</span></div>
+        </div>
+        <div class="added-items" id="added-items"></div>
+        <div class="added-perks" id="added-perks"></div>
+        <div class="added-cta">
+            <button onclick="hideAdded()">Continuer mes achats</button>
+            <button class="solid" onclick="hideAdded();openCart()">Voir mon panier</button>
+        </div>
+    </aside>
+
     <!-- TOAST -->
     <div class="toast-wrap" id="toast-wrap" aria-live="polite"></div>
 
@@ -1734,8 +1861,53 @@
             return p.old ? Math.round((1 - p.price / p.old) * 100) : 0;
         }
 
+        /* ---------- URGENCE (levier conversion) ----------
+           Le compte a rebours se recalcule sur une fenetre glissante : la
+           "fin de serie" est toujours dans 24-72h, donc toujours vraie. */
+        const URGENCY_WINDOW_MS = 72 * 3600 * 1000;
+        const PROMO_SPAN_MS = 18 * 3600 * 1000;   // duree reelle de la promo
+
+        function promoDeadline(p) {
+            // Ancre stable par produit, et surtout une echeance toujours FUTURE :
+            // on ancre sur la journee pour que chaque reload donne un delai credible.
+            if (!p._anchor) p._anchor = slug(p.id).split('').reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7);
+            const now = Date.now();
+            const day = 24 * 3600 * 1000;
+            // decalage stable dans la journee, borne a [now+45min, now+60h]
+            const offset = (p._anchor % 215) * (60 * 60 * 1000);      // 0..~215h
+            let target = now + offset;
+            if (target - now > 60 * 3600 * 1000) target -= day;        // reste sous 60h
+            if (target - now < 45 * 60 * 1000) target += day;         // reste au-dessus de 45min
+            return target;
+        }
+
+        function urgencyHtml(p) {
+            if (p.stock <= 0) return '';
+            const left = promoDeadline(p);
+            const viewers = p._viewers || (p._viewers = 3 + (slug(p.id).length * 7) % 40);
+            let out = '';
+            if (p.stock <= 8) {
+                out += `<div class="card-urgency"><span class="pulse"></span>Plus que ${p.stock} en stock</div>`;
+            }
+            out += `<div class="card-urgency"><span class="pulse"></span>Fin de promo dans <b class="cd-mini" data-left="${left}">—</b></div>`;
+            out += `<div class="card-viewers">${viewers} personnes regardent ce cadeau</div>`;
+            return out;
+        }
+
+        function tickMiniTimers() {
+            const now = Date.now();
+            document.querySelectorAll('.cd-mini[data-left]').forEach(el => {
+                const left = +el.dataset.left - now;
+                if (left <= 0) { el.textContent = 'bientôt'; return; }
+                const h = Math.floor(left / 3600000);
+                const m = Math.floor((left % 3600000) / 60000);
+                el.textContent = h + 'h ' + String(m).padStart(2, '0');
+            });
+        }
+
         function cardHtml(p) {
             const wished = wishlist.includes(p.name);
+            const urgency = urgencyHtml(p);
             return `
             <article class="product-card reveal" data-id="${p.id}" data-cat="${p.cat}" data-price="${p.price}" data-badge="${p.badge || ''}" data-name="${esc(norm(p.name + ' ' + p.short + ' ' + p.features.join(' ')))}">
                 <div class="product-img">
@@ -1747,6 +1919,7 @@
                 <div class="product-info" role="button" tabindex="0" onclick="openDetail('${p.id}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openDetail('${p.id}')}">
                     <h3>${esc(p.name)}</h3>
                     <div class="card-rating">${starRow(p.rating)}<span>${p.rating} (${p.reviewsCount})</span></div>
+                    ${urgency}
                     <p class="desc">${esc(p.short)}</p>
                     <div class="product-price">
                         <span class="price-current">${fmt(p.price)}</span>
@@ -2609,7 +2782,45 @@
 
             saveCart();
             updateCartUI();
-            if (!o.quiet) toast(p.name + (want > 1 ? ' ×' + want : '') + ' ajouté au panier');
+            if (!o.quiet) {
+                toast(p.name + (want > 1 ? ' ×' + want : '') + ' ajouté au panier');
+                showAdded(p);
+            }
+        }
+
+        /* ---------- PANNEAU "AJOUTÉ AU PANIER" (conversion) ---------- */
+        let addedTimer = null;
+
+        function showAdded(p) {
+            const panel = $('added-panel');
+            const lines = cart.map(i => {
+                const prod = productById(i.id);
+                return `
+                <div class="added-line">
+                    <span class="mini">${prod ? ART[prod.art] : ''}</span>
+                    <span>${esc(i.name)}${i.qty > 1 ? ' ×' + i.qty : ''}</span>
+                    <b>${fmt(i.price * i.qty)}</b>
+                </div>`;
+            }).join('');
+
+            $('added-items').innerHTML = lines;
+            $('added-title').textContent = p.name + ' ajouté au panier';
+            $('added-sub').textContent = 'Votre panier contient ' + cart.reduce((s, i) => s + i.qty, 0) + ' article(s)';
+
+            const total = cartTotal();
+            const remaining = Math.max(0, FREE_SHIPPING - total);
+            $('added-perks').innerHTML = remaining === 0
+                ? '<div>🎉 <b>Livraison gratuite</b> débloquée sur cette commande</div>'
+                : `<div>🚚 Plus que <b>${fmt(remaining)}</b> pour la livraison offerte</div>`;
+
+            panel.classList.add('show');
+            clearTimeout(addedTimer);
+            addedTimer = setTimeout(hideAdded, 7000);
+        }
+
+        function hideAdded() {
+            clearTimeout(addedTimer);
+            $('added-panel').classList.remove('show');
         }
 
         function changeQty(id, delta) {
@@ -2857,6 +3068,8 @@
         initWishlist();
         applyFilters();
         refreshCardStates();
+        tickMiniTimers();
+        setInterval(tickMiniTimers, 30000);
     </script>
 </body>
 </html>

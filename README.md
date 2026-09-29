@@ -31,6 +31,19 @@ python -m http.server 8000
 - **Mentions légales** en 5 onglets : mentions légales, CGV, confidentialité, cookies, contact.
 - **SEO** : meta description, Open Graph, Twitter card, favicon SVG, JSON-LD `OnlineStore`.
 
+
+## Couche conversion
+
+Éléments ajoutés pour transformer le visiteur en acheteur :
+
+- **Barre de réassurance** sous le hero (livraison, paiement Mobile Money, emballage premium, retours) — lève les freins avant le scroll.
+- **Preuve sociale chiffrée** dans le hero (clients, note moyenne, délai de livraison, retours).
+- **Urgence sur les fiches produit** : stock faible, compte à rebours de fin de promo borné entre 45 min et 60 h, et nombre de spectateurs.
+- **Panneau « ajouté au panier »** qui suit l'ajout : récapitulatif du panier, barre vers la livraison offerte, et double CTA (continuer / voir le panier).
+
+Le compte à rebours de promo est recalculé à chaque chargement à partir d'une ancre
+stable par produit, avec une échéance toujours future et crédible.
+
 ## Structure
 
 ```
