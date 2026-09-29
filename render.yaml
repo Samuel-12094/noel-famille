@@ -1,0 +1,31 @@
+# Blueprint Render — Noel en Famille
+# Site statique : un seul fichier HTML, aucune dependance, aucun build.
+# Deploiement : https://dashboard.render.com  >  New > Blueprint
+# (Render detecte ce fichier automatiquement et cree le site)
+
+services:
+  - type: web
+    name: noel-famille
+    runtime: static
+    repo: https://github.com/Samuel-12094/noel-famille
+    branch: main
+    # Aucune compilation : le site est deja pret a publier
+    buildCommand: ""
+    # index.html est a la racine du depot
+    staticPublishPath: ./
+    autoDeployTrigger: commit
+    headers:
+      # HTML : ne pas mettre en cache, le site est mis a jour par commit
+      - path: /*
+        name: Cache-Control
+        value: max-age=0, must-revalidate
+      # En-tetes de securite
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
