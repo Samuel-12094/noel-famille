@@ -1,0 +1,35 @@
+# Dependencies / build
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.*
+
+# Logs & OS
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Local / temp
+tmp/
+temp/
+*.bak
+*.orig
+*.rej
+
+# Netlify CLI (etat local lie a un compte, specifique a la machine)
+.netlify/
