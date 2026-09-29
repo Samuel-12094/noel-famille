@@ -1,77 +1,98 @@
-# Noël en Famille
+# Noël en Famille — site de contenu
 
-Boutique de cadeaux de Noël pour **toute la famille**, en français.
-Site statique, **fichier HTML unique**, sans aucune dépendance externe.
+Sélection éditoriale de cadeaux de Noël pour toute la famille.
+Site statique, sans panier, sans paiement, sans collecte de données.
 
-Thème clair, rouge & vert. Positionnement : cadeaux pour tous les âges et tous les budgets.
+**En ligne :** https://noel-en-famille.onrender.com
 
-## Démarrage
+## Ce que c'est
 
-Ouvrir directement `index.html` dans un navigateur, ou servir le dossier :
+Un site de contenu organisé par univers de cadeau, construit pour le
+référencement naturel. Chaque univers a sa propre URL, son propre texte et
+ses propres données structurées.
 
-```bash
-python -m http.server 8000
-# http://localhost:8000/
-```
-
-## Fonctionnalités
-
-- **Catalogue piloté par les données** — le tableau `CATALOG` alimente les cartes,
-  les fiches produit, les filtres et le panier.
-- **Illustrations SVG** intégrées en ligne (aucun appel réseau).
-- **Recherche** insensible aux accents, filtres catégorie / promo / bestseller / favoris, tri par prix.
-- **Sélecteur de cadeau** : destinataire + budget.
-- **Fiche produit** : caractéristiques, quantité, avis, « souvent achetés ensemble ».
-- **Avis clients** avec note par étoiles et photo compressée côté client.
-- **Wishlist** (cœur) persistante.
-- **Panier** persistant : quantités, suppression, barre de progression vers la livraison offerte.
-- **Livraison offerte dès 30 000 FCFA** (5 000 FCFA en dessous), avec barre de progression.
-- **Checkout** en deux étapes : récapitulatif puis formulaire, confirmation avec référence `NF-XXXXXX`.
-- **Compte à rebours** jusqu'au 25 décembre.
-- **Mentions légales** en 5 onglets : mentions légales, CGV, confidentialité, cookies, contact.
-- **SEO** : meta description, Open Graph, Twitter card, favicon SVG, JSON-LD `OnlineStore`.
-
-
-## Couche conversion
-
-Éléments ajoutés pour transformer le visiteur en acheteur :
-
-- **Barre de réassurance** sous le hero (livraison, paiement Mobile Money, emballage premium, retours) — lève les freins avant le scroll.
-- **Preuve sociale chiffrée** dans le hero (clients, note moyenne, délai de livraison, retours).
-- **Urgence sur les fiches produit** : stock faible, compte à rebours de fin de promo borné entre 45 min et 60 h, et nombre de spectateurs.
-- **Panneau « ajouté au panier »** qui suit l'ajout : récapitulatif du panier, barre vers la livraison offerte, et double CTA (continuer / voir le panier).
-
-Le compte à rebours de promo est recalculé à chaque chargement à partir d'une ancre
-stable par produit, avec une échéance toujours future et crédible.
+| | |
+|---|---|
+| Pages | 19 |
+| Univers | 6 |
+| Fiches produit | 9 |
+| Pages institutionnelles | 3 |
+| Technologie | HTML, CSS et JavaScript statiques |
+| Dépendances | aucune |
+| Build | aucun |
 
 ## Structure
 
 ```
-index.html
-├── <style>    thème, composants, responsive
-└── <script>   ART → CATALOG → API → rendu → filtres → panier → checkout
+index.html                        accueil
+cadeaux-enfants/                  univers + ses fiches
+cadeaux-ados/
+cadeaux-mamans/
+cadeaux-papas/
+cadeaux-grands-parents/
+cadeaux-animaux/
+a-propos/                         nos critères de sélection
+guide/                            la méthode en quatre questions
+mentions-legales/                 éditeur, données, prix
+assets/                           site.css, site.js, favicon.svg
+img/                              photographies produit
+sitemap.xml
+robots.txt
 ```
 
-## Persistance
+Les URL sont propres : `/cadeaux-enfants/` sert `cadeaux-enfants/index.html`,
+ce qui fonctionne sur tout hébergeur statique, y compris en ouverture
+directe d'un fichier sur le disque.
 
-| Clé | Contenu |
-|---|---|
-| `noel-famille-cart` | Panier |
-| `noel-famille-wishlist` | Favoris |
-| `noel-famille-reviews` | Avis publiés |
-| `noel-famille-orders` | Commandes |
+## Choix techniques
 
-## Backend
+**Pas de dépendance.** Ni framework, ni bundler, ni `node_modules`. Le dépôt
+se déploie tel quel, et le premier octet arrive aussi vite qu'un fichier
+statique.
 
-`API` est une couche d'abstraction prête à être branchée sur un vrai serveur
-(endpoint cible : `/api/orders`). Remplacez le corps de ses cinq méthodes par
-des appels `fetch()` ; le reste du front n'a pas à changer.
+**Pas de page unique avec routage.** Chaque page est un document HTML
+complet et distinct. Un moteur qui rend une seule page et change le contenu
+après coup force Google à exécuter du JavaScript pour lire la page. Ici,
+chaque URL est lisible directement dans la réponse HTTP.
 
-## Accessibilité
+**Pas de suivi.** Aucun cookie, aucun pixel, aucun service tiers de mesure
+d'audience. La seule ressource externe est la feuille de police Google, et
+rien n'est transmis à qui que ce soit.
 
-Navigation clavier complète, piège de focus dans les modales, `Échap` ferme la
-couche supérieure, attributs `aria`, et respect de `prefers-reduced-motion`.
+**Aucune donnée personnelle.** Pas de formulaire, pas de compte, pas de
+cookie. Le site fonctionne entièrement sans JavaScript : celui-ci ne sert
+qu'au menu mobile, à la révélation au défilement et aux accordéons.
 
 ## Contenu
 
-Produits, avis et coordonnées sont **fictifs**, fournis à titre de démonstration.
+Les textes ne sont pas remplissés. Chaque univers explique ses propres
+critères de choix, et chaque fiche justifie la présence du produit dans la
+sélection par des caractéristiques vérifiables plutôt que par des promesses.
+
+Les prix indiqués sont des ordres de grandeur destinés à situer un budget.
+Ils ne constituent pas une offre et ne sont pas garantis.
+
+## Déploiement
+
+Render, via `render.yaml` (site statique, sans commande de build).
+Chaque `git push` sur `main` redéploie.
+
+## Accessibilité
+
+Navigation au clavier complète, lien d'évitement, `aria-current` sur la page
+courante,Focus visible, contrastes vérifiés, respect de
+`prefers-reduced-motion`, et un seul `h1` par page.
+
+## Vérification
+
+Le dépôt est contrôlé avant chaque déploiement : structure HTML, résolution
+de tous les liens internes, présence des images, unicité et longueur des
+balises SEO, validité des données structurées, intégrité du texte français,
+et chargement sans erreur JavaScript.
+
+## Photographies
+
+Les photographies de produit proviennent des sources fournies pour ce projet.
+Trois produits sans photographie légitime utilisent une illustration
+vectorielle de substitution, générée à la volée, afin d'éviter toute image
+cassée.

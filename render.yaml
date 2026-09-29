@@ -1,5 +1,5 @@
-# Blueprint Render — Noel en Famille
-# Site statique : un seul fichier HTML, aucune dependance, aucun build.
+# Blueprint Render - Noel en Famille
+# Site statique multi-pages : 19 documents HTML, aucune dependance, aucun build.
 # Deploiement : https://dashboard.render.com  >  New > Blueprint
 # (Render detecte ce fichier automatiquement et cree le site)
 
@@ -15,10 +15,14 @@ services:
     staticPublishPath: ./
     autoDeployTrigger: commit
     headers:
-      # HTML : ne pas mettre en cache, le site est mis a jour par commit
+      # HTML et donnees structurees : pas de cache long, le site change par commit
       - path: /*
         name: Cache-Control
         value: max-age=0, must-revalidate
+      # Feuille de style et script : caches courts, changement peu frequent
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=604800
       # En-tetes de securite
       - path: /*
         name: X-Content-Type-Options
@@ -29,3 +33,18 @@ services:
       - path: /*
         name: X-Frame-Options
         value: SAMEORIGIN
+      - path: /*
+        name: Permissions-Policy
+        value: geolocation=(), microphone=(), camera=(), interest-cohort=()
+      - path: /*
+        name: Content-Security-Policy
+        value: >-
+          default-src 'self';
+          script-src 'self';
+          style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+          font-src 'self' https://fonts.gstatic.com;
+          img-src 'self' data:;
+          connect-src 'none';
+          form-action 'none';
+          frame-ancestors 'self';
+          base-uri 'self'
