@@ -56,6 +56,11 @@
             --brown: #5d4037;
             --white: #ffffff;
             --orange: #e67e22;
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        :root {
+            --heart-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%2020.2S3.6%2015.2%203.6%209.4A4.4%204.4%200%200%201%2012%207.2a4.4%204.4%200%200%201%208.4%202.2c0%205.8-8.4%2010.8-8.4%2010.8z%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.7%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+            --heart-fill-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%2020.4S3.4%2015.1%203.4%209.2A4.6%204.6%200%200%201%2012%206.9a4.6%204.6%200%200%201%208.6%202.3c0%205.9-8.6%2011.2-8.6%2011.2z%22%2F%3E%3C%2Fsvg%3E");
+        }
         }
         body {
             font-family: 'Poppins', sans-serif;
@@ -104,10 +109,7 @@
             overflow: hidden;
         }
         .hero::before {
-            content: '🎄';
-            position: absolute; font-size: 30rem;
-            opacity: 0.04; top: -50px; right: -50px;
-            transform: rotate(15deg);
+            content: none;
         }
         .hero-container {
             max-width: 1200px; margin: 0 auto;
@@ -534,6 +536,50 @@
         @keyframes pulse-dot { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
         .card-viewers { font-size: 0.7rem; opacity: 0.5; margin-bottom: 10px; }
 
+        /* ICONES SVG (remplacent les emoji) */
+        .ic {
+            width: 1em; height: 1em;
+            flex: 0 0 auto;
+            vertical-align: -0.13em;
+            overflow: visible;
+        }
+        .logo .ic { width: 1.15em; height: 1.15em; }
+        .cart-btn .ic { margin-right: .35em; }
+        .category-icon { display: flex; justify-content: center; margin-bottom: 12px; }
+        .category-icon .ic { width: 34px; height: 34px; stroke-width: 1.35; color: var(--red); transition: transform .35s var(--ease); }
+        .category-card:hover .category-icon .ic { transform: translateY(-3px) scale(1.06); }
+        .category-card.active .category-icon .ic { color: var(--red-dark); }
+        .reassure-item .ic, .feature .feature-icon .ic { width: 26px; height: 26px; stroke-width: 1.4; color: var(--red); }
+        .feature-icon { display: flex; justify-content: center; margin-bottom: 12px; }
+        .search-icon { color: var(--brown); opacity: .45; }
+        .search-icon .ic { width: 17px; height: 17px; }
+        .no-results .big .ic { width: 46px; height: 46px; stroke-width: 1.1; color: var(--brown); opacity: .3; }
+        .hero-visual .ic { width: 100%; height: auto; }
+        .hero-visual .floating .ic { width: 34px; height: 34px; stroke-width: 1.4; }
+        .added-perks .ic, .added-line .ic { width: 15px; height: 15px; stroke-width: 1.7; }
+        .added-perks .ic { color: var(--green-dark); }
+        .photo-drop .ic, .review-form-toggle .ic { width: 1.05em; height: 1.05em; margin-right: .3em; vertical-align: -0.15em; }
+        .wish-btn::before, .wish-btn.active::before { font-size: 0; }
+        .wish-btn::after {
+            content: ''; position: absolute; inset: 0;
+            background: currentColor;
+            -webkit-mask: var(--heart-mask) center / 15px 15px no-repeat;
+            mask: var(--heart-mask) center / 15px 15px no-repeat;
+            color: var(--red);
+        }
+        .wish-btn.active::after {
+            background: var(--red);
+            -webkit-mask-image: var(--heart-fill-mask);
+            mask-image: var(--heart-fill-mask);
+        }
+        .added-panel .tick .ic { width: 15px; height: 15px; }
+        .tick { color: var(--white); }
+        .review-form-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+        .photo-drop { display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .star-row .ic { display: none; }
+        @media (prefers-reduced-motion: reduce) {
+            .category-card:hover .category-icon .ic { transform: none; }
+        }
         /* LOADING SKELETON */
         .skeleton {
             background: var(--white);
@@ -791,8 +837,6 @@
         }
         .wish-btn:hover { transform: scale(1.18); }
         .wish-btn.active { background: var(--red); }
-        .wish-btn.active::before { content: '❤️'; }
-        .wish-btn::before { content: '🤍'; }
         .wish-btn.active:hover { transform: scale(1.28); }
 
         /* GIFT FINDER */
@@ -1261,15 +1305,46 @@
     </style>
 </head>
 <body>
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="ic-tree" viewBox="0 0 24 24"><path d="M12 2 6.5 9h2L5 14.5h2.2L4 20h16l-3.2-5.5H19L15.5 9h2z"/><rect x="10.4" y="20" width="3.2" height="2.2" rx=".6"/></symbol>
+<symbol id="ic-gift" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="12" rx="1.4"/><path d="M3 13h18M12 9v12"/><path d="M12 9S9.6 9 8.4 7.9A2.3 2.3 0 0 1 12 5.6c.9 0 1.6.6 1.8 1.4"/><path d="M12 9s2.4 0 3.6-1.1A2.3 2.3 0 0 0 12 5.6"/></symbol>
+<symbol id="ic-star" viewBox="0 0 24 24"><path d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6L12 16.8 6.7 19.6l1.1-6L3.4 9.4l6-.8z"/></symbol>
+<symbol id="ic-deer" viewBox="0 0 24 24"><path d="M6 3.5 4.5 6M6 3.5 7.5 6M18 3.5 16.5 6M18 3.5 19.5 6M12 8c-3 0-4.5 2-4.5 4.5S9 17 12 17s4.5-2 4.5-4.5S15 8 12 8z"/><circle cx="10.3" cy="11" r=".8" fill="currentColor" stroke="none"/><circle cx="13.7" cy="11" r=".8" fill="currentColor" stroke="none"/><path d="M12 13.5v1"/></symbol>
+<symbol id="ic-bell" viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 4 1.2 5.4 1.8 6H4.2C4.8 14.4 6 13 6 9z"/><path d="M10.2 18.5a2 2 0 0 0 3.6 0"/></symbol>
+<symbol id="ic-cart" viewBox="0 0 24 24"><path d="M2.5 3.5h2.2l2.3 10.2a1.6 1.6 0 0 0 1.6 1.3h7.6a1.6 1.6 0 0 0 1.6-1.3L19.5 7H6"/><circle cx="9.5" cy="19.5" r="1.2"/><circle cx="16.5" cy="19.5" r="1.2"/></symbol>
+<symbol id="ic-teddy" viewBox="0 0 24 24"><circle cx="12" cy="15" r="6"/><circle cx="5.4" cy="7.4" r="2.6"/><circle cx="18.6" cy="7.4" r="2.6"/><circle cx="12" cy="12.6" r="2.9"/><path d="M10.4 11.2h.01M13.6 11.2h.01" stroke-width="1.8"/><path d="M12 14v1.2M12 15.2c-1 1-2.4.6-2.8-.4M12 15.2c1 1 2.4.6 2.8-.4"/></symbol>
+<symbol id="ic-gamepad" viewBox="0 0 24 24"><path d="M7.6 7.5h8.8c2.6 0 4.3 3 4.3 6.1 0 2-1.3 3.4-3 3.4-1.3 0-2.1-.8-3-2l-.7-1h-4l-.7 1c-.9 1.2-1.7 2-3 2-1.7 0-3-1.4-3-3.4 0-3.1 1.7-6.1 4.3-6.1z"/><path d="M7 10.6v2.4M5.8 11.8h2.4"/><circle cx="16.4" cy="11.4" r="1"/><circle cx="18.2" cy="13.2" r="1"/></symbol>
+<symbol id="ic-woman" viewBox="0 0 24 24"><circle cx="12" cy="5.4" r="2.9"/><path d="M12 8.6c-2.3 1.3-3.4 3.4-3.6 6l-.3 4.2M12 8.6c2.3 1.3 3.4 3.4 3.6 6l.3 4.2M8.6 12.4h6.8M9 18.8h6"/></symbol>
+<symbol id="ic-man" viewBox="0 0 24 24"><circle cx="12" cy="5.4" r="2.9"/><path d="M12 8.6c-2.2 1.2-3.3 3.2-3.6 5.8M12 8.6c2.2 1.2 3.3 3.2 3.6 5.8M8.8 12.2h6.4M9.4 18.8h5.2"/></symbol>
+<symbol id="ic-elder" viewBox="0 0 24 24"><circle cx="12" cy="5.2" r="2.8"/><path d="M12 8.4c-2.2 1.2-3.3 3.3-3.6 6M12 8.4c2.2 1.2 3.3 3.3 3.6 6M5.6 5.6 3.4 3.4M6.8 7 5.6 4.4M18.4 5.6l2.2-2.2M17.2 7l1.2-2.6"/><path d="M8.4 12h7.2M9.4 18.8h5.2"/></symbol>
+<symbol id="ic-paw" viewBox="0 0 24 24"><ellipse cx="12" cy="15.6" rx="4.6" ry="3.8"/><ellipse cx="6.4" cy="10.4" rx="2" ry="2.6"/><ellipse cx="10" cy="7.4" rx="1.9" ry="2.6"/><ellipse cx="14.2" cy="7.4" rx="1.9" ry="2.6"/><ellipse cx="17.6" cy="10.4" rx="2" ry="2.6"/></symbol>
+<symbol id="ic-sparkle" viewBox="0 0 24 24"><path d="M12 3.2 13.7 9l5.8 1.7-5.8 1.7L12 18.2 10.3 12.4 4.5 10.7 10.3 9z"/><path d="M18.6 16.4 19.3 18.6 21.5 19.3 19.3 20 18.6 22.2 17.9 20 15.7 19.3 17.9 18.6z"/></symbol>
+<symbol id="ic-truck" viewBox="0 0 24 24"><path d="M2.5 6.2h10.2v10H2.5z"/><path d="M12.7 9.4h4l3 3.1v3.7h-7z"/><circle cx="7" cy="18.2" r="1.8"/><circle cx="16.6" cy="18.2" r="1.8"/></symbol>
+<symbol id="ic-lock" viewBox="0 0 24 24"><rect x="4.4" y="10.4" width="15.2" height="10.2" rx="1.6"/><path d="M8 10.4V7.6a4 4 0 0 1 8 0v2.8"/><path d="M12 14.2v2.4"/></symbol>
+<symbol id="ic-returnArrow" viewBox="0 0 24 24"><path d="M3.6 9.4h11.2a5.4 5.4 0 0 1 0 10.8H9"/><path d="M7.2 5.2 3.2 9.4l4 4.2"/></symbol>
+<symbol id="ic-wallet" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="1.8"/><path d="M3 9.6h18"/><circle cx="16.8" cy="14" r="1.5"/><path d="M6.4 6V4.8a1.4 1.4 0 0 1 1.4-1.4h8.4"/></symbol>
+<symbol id="ic-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m15.6 15.6 4.4 4.4"/></symbol>
+<symbol id="ic-heart" viewBox="0 0 24 24"><path d="M12 20.2S3.6 15.2 3.6 9.4A4.4 4.4 0 0 1 12 7.2a4.4 4.4 0 0 1 8.4 2.2c0 5.8-8.4 10.8-8.4 10.8z"/></symbol>
+<symbol id="ic-pen" viewBox="0 0 24 24"><path d="M15.4 3.9 20 8.5 8.8 19.7l-5.2 1.3 1.3-5.2z"/><path d="m13.6 5.7 4.6 4.6"/></symbol>
+<symbol id="ic-camera" viewBox="0 0 24 24"><path d="M3 8.4h3.4l1.5-2.4h8.2l1.5 2.4H21v10.2H3z"/><circle cx="12" cy="13.2" r="3.4"/></symbol>
+<symbol id="ic-bag" viewBox="0 0 24 24"><path d="M4.6 8h14.8l1.1 12.4H3.5z"/><path d="M8.6 8V5.6a3.4 3.4 0 0 1 6.8 0V8"/></symbol>
+<symbol id="ic-wine" viewBox="0 0 24 24"><path d="M7.6 3.4h8.8l-.6 5.2a3.8 3.8 0 0 1-3.8 3.4 3.8 3.8 0 0 1-3.8-3.4z"/><path d="M12 12v8.6M8.6 20.6h6.8"/></symbol>
+<symbol id="ic-candle" viewBox="0 0 24 24"><rect x="9" y="9" width="6" height="11.4" rx="1"/><path d="M12 9V6.4M10.4 4.4a1.6 1.6 0 0 1 1.6 1.6 1.6 1.6 0 0 1-1.6 1.6"/></symbol>
+<symbol id="ic-headphones" viewBox="0 0 24 24"><path d="M4 15v-2.8a8 8 0 0 1 16 0V15"/><rect x="2.6" y="13.4" width="4.4" height="7" rx="2"/><rect x="17" y="13.4" width="4.4" height="7" rx="2"/></symbol>
+<symbol id="ic-watch" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5.4"/><path d="M8.8 6.9 9.6 3h4.8l.8 3.9M8.8 17.1l.8 3.9h4.8l.8-3.9M12 9.4V12l1.8 1.2"/></symbol>
+<symbol id="ic-box" viewBox="0 0 24 24"><path d="m12 3 8 4.2v9.6L12 21l-8-4.2V7.2z"/><path d="m4 7.2 8 4.2 8-4.2M12 11.4V21"/></symbol>
+<symbol id="ic-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"/></symbol>
+        </defs></svg>
+
 
     <!-- NAV -->
     <nav>
-        <div class="logo">🎄 Noël en Famille</div>
+        <div class="logo"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 6.5 9h2L5 14.5h2.2L4 20h16l-3.2-5.5H19L15.5 9h2z"/><rect x="10.4" y="20" width="3.2" height="2.2" rx=".6"/></svg> Noël en Famille</div>
         <div class="nav-links" id="nav-links">
             <a href="#boutique" onclick="closeMenu()">Boutique</a>
             <a href="#categories" onclick="closeMenu()">Catégories</a>
             <a href="#avis" onclick="closeMenu()">Avis</a>
-            <button class="cart-btn" onclick="openCart()">🛒 Panier (<span id="cart-count">0</span>)</button>
+            <button class="cart-btn" onclick="openCart()"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 3.5h2.2l2.3 10.2a1.6 1.6 0 0 0 1.6 1.3h7.6a1.6 1.6 0 0 0 1.6-1.3L19.5 7H6"/><circle cx="9.5" cy="19.5" r="1.2"/><circle cx="16.5" cy="19.5" r="1.2"/></svg> Panier (<span id="cart-count">0</span>)</button>
         </div>
         <button class="menu-toggle" id="menu-toggle" onclick="toggleMenu()" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
     </nav>
@@ -1289,11 +1364,11 @@
                 </div>
             </div>
             <div class="hero-visual">
-                🎄
-                <span class="floating">🎁</span>
-                <span class="floating">⭐</span>
-                <span class="floating">🦌</span>
-                <span class="floating">🔔</span>
+                <svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 6.5 9h2L5 14.5h2.2L4 20h16l-3.2-5.5H19L15.5 9h2z"/><rect x="10.4" y="20" width="3.2" height="2.2" rx=".6"/></svg>
+                <span class="floating"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="1.4"/><path d="M3 13h18M12 9v12"/><path d="M12 9S9.6 9 8.4 7.9A2.3 2.3 0 0 1 12 5.6c.9 0 1.6.6 1.8 1.4"/><path d="M12 9s2.4 0 3.6-1.1A2.3 2.3 0 0 0 12 5.6"/></svg></span>
+                <span class="floating"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 2.6 5.6 6 .8-4.4 4.2 1.1 6L12 16.8 6.7 19.6l1.1-6L3.4 9.4l6-.8z"/></svg></span>
+                <span class="floating"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5 4.5 6M6 3.5 7.5 6M18 3.5 16.5 6M18 3.5 19.5 6M12 8c-3 0-4.5 2-4.5 4.5S9 17 12 17s4.5-2 4.5-4.5S15 8 12 8z"/><circle cx="10.3" cy="11" r=".8" fill="currentColor" stroke="none"/><circle cx="13.7" cy="11" r=".8" fill="currentColor" stroke="none"/><path d="M12 13.5v1"/></svg></span>
+                <span class="floating"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9a6 6 0 0 1 12 0c0 4 1.2 5.4 1.8 6H4.2C4.8 14.4 6 13 6 9z"/><path d="M10.2 18.5a2 2 0 0 0 3.6 0"/></svg></span>
             </div>
         </div>
     </section>
@@ -1325,31 +1400,31 @@
     <section class="categories" id="categories">
         <div class="categories-grid" id="category-grid">
             <button class="category-card active" data-filter="all">
-                <div class="category-icon">✨</div>
+                <div class="category-icon"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 13.7 9l5.8 1.7-5.8 1.7L12 18.2 10.3 12.4 4.5 10.7 10.3 9z"/><path d="M18.6 16.4 19.3 18.6 21.5 19.3 19.3 20 18.6 22.2 17.9 20 15.7 19.3 17.9 18.6z"/></svg></div>
                 <h4>Tout</h4>
             </button>
             <button class="category-card" data-filter="enfants">
-                <div class="category-icon">🧸</div>
+                <div class="category-icon"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="15" r="6"/><circle cx="5.4" cy="7.4" r="2.6"/><circle cx="18.6" cy="7.4" r="2.6"/><circle cx="12" cy="12.6" r="2.9"/><path d="M10.4 11.2h.01M13.6 11.2h.01" stroke-width="1.8"/><path d="M12 14v1.2M12 15.2c-1 1-2.4.6-2.8-.4M12 15.2c1 1 2.4.6 2.8-.4"/></svg></div>
                 <h4>Enfants</h4>
             </button>
             <button class="category-card" data-filter="ados">
-                <div class="category-icon">🎮</div>
+                <div class="category-icon"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.6 7.5h8.8c2.6 0 4.3 3 4.3 6.1 0 2-1.3 3.4-3 3.4-1.3 0-2.1-.8-3-2l-.7-1h-4l-.7 1c-.9 1.2-1.7 2-3 2-1.7 0-3-1.4-3-3.4 0-3.1 1.7-6.1 4.3-6.1z"/><path d="M7 10.6v2.4M5.8 11.8h2.4"/><circle cx="16.4" cy="11.4" r="1"/><circle cx="18.2" cy="13.2" r="1"/></svg></div>
                 <h4>Ados</h4>
             </button>
             <button class="category-card" data-filter="mamans">
-                <div class="category-icon">👩</div>
+                <div class="category-icon"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5.4" r="2.9"/><path d="M12 8.6c-2.3 1.3-3.4 3.4-3.6 6l-.3 4.2M12 8.6c2.3 1.3 3.4 3.4 3.6 6l.3 4.2M8.6 12.4h6.8M9 18.8h6"/></svg></div>
                 <h4>Mamans</h4>
             </button>
             <button class="category-card" data-filter="papas">
-                <div class="category-icon">👨</div>
+                <div class="category-icon"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5.4" r="2.9"/><path d="M12 8.6c-2.2 1.2-3.3 3.2-3.6 5.8M12 8.6c2.2 1.2 3.3 3.2 3.6 5.8M8.8 12.2h6.4M9.4 18.8h5.2"/></svg></div>
                 <h4>Papas</h4>
             </button>
             <button class="category-card" data-filter="grands-parents">
-                <div class="category-icon">👵</div>
+                <div class="category-icon"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5.2" r="2.8"/><path d="M12 8.4c-2.2 1.2-3.3 3.3-3.6 6M12 8.4c2.2 1.2 3.3 3.3 3.6 6M5.6 5.6 3.4 3.4M6.8 7 5.6 4.4M18.4 5.6l2.2-2.2M17.2 7l1.2-2.6"/><path d="M8.4 12h7.2M9.4 18.8h5.2"/></svg></div>
                 <h4>Grands-parents</h4>
             </button>
             <button class="category-card" data-filter="animaux">
-                <div class="category-icon">🐕</div>
+                <div class="category-icon"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="15.6" rx="4.6" ry="3.8"/><ellipse cx="6.4" cy="10.4" rx="2" ry="2.6"/><ellipse cx="10" cy="7.4" rx="1.9" ry="2.6"/><ellipse cx="14.2" cy="7.4" rx="1.9" ry="2.6"/><ellipse cx="17.6" cy="10.4" rx="2" ry="2.6"/></svg></div>
                 <h4>Animaux</h4>
             </button>
         </div>
@@ -1358,19 +1433,19 @@
     <!-- REASSURANCE BAR -->
     <section class="reassure">
         <div class="reassure-item">
-            <span class="ri">🚚</span>
+            <span class="ri"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.2h10.2v10H2.5z"/><path d="M12.7 9.4h4l3 3.1v3.7h-7z"/><circle cx="7" cy="18.2" r="1.8"/><circle cx="16.6" cy="18.2" r="1.8"/></svg></span>
             <div><b>Livraison 24-48h</b><p>Partout au Bénin. Offerte dès 30 000 FCFA.</p></div>
         </div>
         <div class="reassure-item">
-            <span class="ri">🔒</span>
+            <span class="ri"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.4" y="10.4" width="15.2" height="10.2" rx="1.6"/><path d="M8 10.4V7.6a4 4 0 0 1 8 0v2.8"/><path d="M12 14.2v2.4"/></svg></span>
             <div><b>Paiement Mobile Money</b><p>MTN MoMo, Moov Money ou carte. 100% sécurisé.</p></div>
         </div>
         <div class="reassure-item">
-            <span class="ri">🎁</span>
+            <span class="ri"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="1.4"/><path d="M3 13h18M12 9v12"/><path d="M12 9S9.6 9 8.4 7.9A2.3 2.3 0 0 1 12 5.6c.9 0 1.6.6 1.8 1.4"/><path d="M12 9s2.4 0 3.6-1.1A2.3 2.3 0 0 0 12 5.6"/></svg></span>
             <div><b>Emballage cadeau offert</b><p>Carte de vœux personnalisée incluse.</p></div>
         </div>
         <div class="reassure-item">
-            <span class="ri">↩️</span>
+            <span class="ri"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.6 9.4h11.2a5.4 5.4 0 0 1 0 10.8H9"/><path d="M7.2 5.2 3.2 9.4l4 4.2"/></svg></span>
             <div><b>15 jours pour changer d'avis</b><p>Retour simple, remboursement rapide.</p></div>
         </div>
     </section>
@@ -1417,7 +1492,7 @@
 
         <div class="shop-toolbar">
             <div class="search-box">
-                <span class="search-icon">🔍</span>
+                <span class="search-icon"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m15.6 15.6 4.4 4.4"/></svg></span>
                 <input type="search" id="search-input" placeholder="Rechercher un cadeau..." aria-label="Rechercher un cadeau">
             </div>
             <div class="budget-box">
@@ -1446,7 +1521,7 @@
         </div>
 
         <div class="no-results" id="no-results">
-            <div class="big">🔍</div>
+            <div class="big"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.4"/><path d="m15.6 15.6 4.4 4.4"/></svg></div>
             <p>Aucun cadeau ne correspond à votre recherche.</p>
             <button class="chip" onclick="resetFilters()">Réinitialiser les filtres</button>
         </div>
@@ -1463,22 +1538,22 @@
     <section class="features">
         <div class="features-grid">
             <div class="feature">
-                <div class="feature-icon">🚚</div>
+                <div class="feature-icon"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.2h10.2v10H2.5z"/><path d="M12.7 9.4h4l3 3.1v3.7h-7z"/><circle cx="7" cy="18.2" r="1.8"/><circle cx="16.6" cy="18.2" r="1.8"/></svg></div>
                 <h4>Livraison Rapide</h4>
                 <p>Partout au Bénin en 24-48h</p>
             </div>
             <div class="feature">
-                <div class="feature-icon">💰</div>
+                <div class="feature-icon"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="1.8"/><path d="M3 9.6h18"/><circle cx="16.8" cy="14" r="1.5"/><path d="M6.4 6V4.8a1.4 1.4 0 0 1 1.4-1.4h8.4"/></svg></div>
                 <h4>Paiement Mobile</h4>
                 <p>MTN MoMo, Moov Money, Carte</p>
             </div>
             <div class="feature">
-                <div class="feature-icon">↩️</div>
+                <div class="feature-icon"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.6 9.4h11.2a5.4 5.4 0 0 1 0 10.8H9"/><path d="M7.2 5.2 3.2 9.4l4 4.2"/></svg></div>
                 <h4>Retour Facile</h4>
                 <p>15 jours pour changer d'avis</p>
             </div>
             <div class="feature">
-                <div class="feature-icon">🎁</div>
+                <div class="feature-icon"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="1.4"/><path d="M3 13h18M12 9v12"/><path d="M12 9S9.6 9 8.4 7.9A2.3 2.3 0 0 1 12 5.6c.9 0 1.6.6 1.8 1.4"/><path d="M12 9s2.4 0 3.6-1.1A2.3 2.3 0 0 0 12 5.6"/></svg></div>
                 <h4>Emballage Offert</h4>
                 <p>Pour chaque commande</p>
             </div>
@@ -1543,7 +1618,7 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-brand">
-                <span class="logo">🎄 Noël en Famille</span>
+                <span class="logo"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 6.5 9h2L5 14.5h2.2L4 20h16l-3.2-5.5H19L15.5 9h2z"/><rect x="10.4" y="20" width="3.2" height="2.2" rx=".6"/></svg> Noël en Famille</span>
                 <p>Pour que chaque Noël soit un moment de joie partagée. Des cadeaux pour tous les âges, tous les goûts, tous les budgets.</p>
             </div>
             <div>
@@ -1583,7 +1658,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            © 2026 Noël en Famille. Fait avec ❤️ pour des fêtes inoubliables.
+            © 2026 Noël en Famille. Fait avec <svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.2S3.6 15.2 3.6 9.4A4.4 4.4 0 0 1 12 7.2a4.4 4.4 0 0 1 8.4 2.2c0 5.8-8.4 10.8-8.4 10.8z"/></svg> pour des fêtes inoubliables.
         </div>
     </footer>
 
@@ -1744,6 +1819,15 @@
         /* ---------- UTILS ---------- */
         const fmt = n => n.toLocaleString('fr-FR') + ' FCFA';
         const $ = id => document.getElementById(id);
+
+        /* Rend une icone SVG depuis le sprite inline. */
+        function ic(name, cls) {
+            const sym = document.querySelector('#ic-' + name);
+            if (!sym) return '';
+            return '<svg class="ic ' + (cls || '') + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+                'stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+                sym.innerHTML + '</svg>';
+        }
         const esc = s => String(s).replace(/[&<>"']/g, c => ({
             '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
         }[c]));
@@ -1788,12 +1872,12 @@
 
         /* ---------- CATALOGUE ---------- */
         const CATEGORIES = {
-            enfants: { label: 'Enfants', icon: '🧸' },
-            ados: { label: 'Ados', icon: '🎮' },
-            mamans: { label: 'Mamans', icon: '👩' },
-            papas: { label: 'Papas', icon: '👨' },
-            'grands-parents': { label: 'Grands-parents', icon: '👵' },
-            animaux: { label: 'Animaux', icon: '🐕' }
+            enfants: { label: 'Enfants', icon: 'teddy' },
+            ados: { label: 'Ados', icon: 'gamepad' },
+            mamans: { label: 'Mamans', icon: 'woman' },
+            papas: { label: 'Papas', icon: 'man' },
+            'grands-parents': { label: 'Grands-parents', icon: 'elder' },
+            animaux: { label: 'Animaux', icon: 'paw' }
         };
 
         const CATALOG = [
@@ -2033,7 +2117,7 @@
                 </div>
             </div>
             <div id="review-list">${list.length ? list.map(reviewHtml).join('') : '<p class="reviews-meta">Aucun avis pour le moment. Soyez le premier.</p>'}</div>
-            <button class="review-form-toggle" id="review-toggle" onclick="toggleReviewForm()">✍️ Rédiger un avis</button>
+            <button class="review-form-toggle" id="review-toggle" onclick="toggleReviewForm()"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.4 3.9 20 8.5 8.8 19.7l-5.2 1.3 1.3-5.2z"/><path d="m13.6 5.7 4.6 4.6"/></svg> Rédiger un avis</button>
             <div id="review-form-wrap" style="display:none">
                 <form id="review-form" onsubmit="return submitReview(event)">
                     <div class="field">
@@ -2054,7 +2138,7 @@
                     </div>
                     <div class="field">
                         <label>Photo (optionnel)</label>
-                        <label class="photo-drop" for="rv-photo" id="photo-drop">📷 Ajouter une photo — 4 Mo max</label>
+                        <label class="photo-drop" for="rv-photo" id="photo-drop"><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.4h3.4l1.5-2.4h8.2l1.5 2.4H21v10.2H3z"/><circle cx="12" cy="13.2" r="3.4"/></svg> Ajouter une photo — 4 Mo max</label>
                         <input type="file" id="rv-photo" accept="image/*" style="display:none" onchange="handlePhoto(this)">
                         <div class="photo-preview" id="photo-preview">
                             <img id="photo-img" src="" alt="Aperçu">
@@ -2810,8 +2894,8 @@
             const total = cartTotal();
             const remaining = Math.max(0, FREE_SHIPPING - total);
             $('added-perks').innerHTML = remaining === 0
-                ? '<div>🎉 <b>Livraison gratuite</b> débloquée sur cette commande</div>'
-                : `<div>🚚 Plus que <b>${fmt(remaining)}</b> pour la livraison offerte</div>`;
+                ? '<div><svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="1.4"/><path d="M3 13h18M12 9v12"/><path d="M12 9S9.6 9 8.4 7.9A2.3 2.3 0 0 1 12 5.6c.9 0 1.6.6 1.8 1.4"/><path d="M12 9s2.4 0 3.6-1.1A2.3 2.3 0 0 0 12 5.6"/></svg> <b>Livraison gratuite</b> débloquée sur cette commande</div>'
+                : `<div>${ic('truck')} Plus que <b>${fmt(remaining)}</b> pour la livraison offerte</div>`;
 
             panel.classList.add('show');
             clearTimeout(addedTimer);
@@ -2891,7 +2975,7 @@
             $('ship-msg').innerHTML = !cart.length
                 ? 'Livraison offerte dès ' + fmt(FREE_SHIPPING) + ' d\'achat'
                 : remaining === 0
-                    ? '🎉 <b>Livraison gratuite</b> débloquée !'
+                    ? '<svg class="ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="9" width="18" height="12" rx="1.4"/><path d="M3 13h18M12 9v12"/><path d="M12 9S9.6 9 8.4 7.9A2.3 2.3 0 0 1 12 5.6c.9 0 1.6.6 1.8 1.4"/><path d="M12 9s2.4 0 3.6-1.1A2.3 2.3 0 0 0 12 5.6"/></svg> <b>Livraison gratuite</b> débloquée !'
                     : 'Plus que <b>' + fmt(remaining) + '</b> pour la livraison gratuite';
 
             $('checkout-btn').disabled = !cart.length;
