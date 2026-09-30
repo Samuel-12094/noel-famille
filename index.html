@@ -56,36 +56,46 @@
 <main id="main">
 
   <section class="hero">
+    <div class="hero__bg" aria-hidden="true">
+      <div class="hero__star hero__star--a"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" aria-hidden="true"><path d="M12 1.8l2.6 6.1 6.6.5-5 4.3 1.5 6.4L12 15.9 6.3 19.1l1.5-6.4-5-4.3 6.6-.5z"/></svg></div>
+      <div class="hero__star hero__star--b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linejoin="round" aria-hidden="true"><path d="M12 1.8l2.6 6.1 6.6.5-5 4.3 1.5 6.4L12 15.9 6.3 19.1l1.5-6.4-5-4.3 6.6-.5z"/></svg></div>
+      <div class="hero__glow"></div>
+    </div>
+
     <div class="wrap hero__in">
-      <div>
-        <p class="eyebrow" data-rise="1">Sélection 2026 — 9 pièces</p>
+      <div class="hero__copy">
+        <p class="hero__eyebrow" data-rise="1">Sélection 2026 — 9 pièces</p>
         <h1 data-rise="2">Le cadeau qui fait <em>plaisir</em>, pour toute la famille</h1>
         <p class="lede" data-rise="3">Trouver le cadeau parfait pour chaque membre de la famille, sans se ruiner et sans y passer trois soirées. On a regardé ce qui tient dans le temps, ce que les enfants utilisent vraiment, et ce que les grands-parents appreciate le plus : ce sont ces objets-là qui figurent dans cette sélection.</p>
-        <div class="hero__actions" data-rise="4">
-          <a class="btn btn--primary" href="#categories">Voir la sélection <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          <a class="btn btn--ghost" href="guide/index.html">Guide d&#39;achat</a>
+        <div class="hero__cta" data-rise="4">
+          <a class="btn-discover" href="#categories">Découvrir la sélection<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="btn-ghost" href="guide/index.html">Notre méthode</a>
         </div>
-        <div class="hero__stats">
-          <div class="hero__stat"><strong>9</strong><span>produits retenus</span></div>
-          <div class="hero__stat"><strong>6</strong><span>univers de cadeau</span></div>
-          <div class="hero__stat"><strong>2026</strong><span>édition en cours</span></div>
+        <div class="hero__meta" data-rise="5">
+          <div><strong>9</strong><span>produits retenus</span></div>
+          <div><strong>6</strong><span>univers de cadeau</span></div>
+          <div><strong>2026</strong><span>édition en cours</span></div>
         </div>
       </div>
-      <div class="mosaic" data-rise="3">
-        <a class="mosaic__item" href="cadeaux-ados/index.html">
+
+      <div class="hero__visual" data-rise="3">
+        <div class="hero__frame" aria-hidden="true"></div>
+        <div class="hero__img">
           <img src="img/console.jpg" alt="Console rétro gaming" loading="lazy" decoding="async" width="400" height="300">
-          <figcaption>Cadeaux pour ados<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></figcaption>
-        </a>
-        <a class="mosaic__item" href="cadeaux-mamans/index.html">
-          <img src="img/cafe.jpg" alt="Coffret café gourmand" loading="lazy" decoding="async" width="400" height="300">
-          <figcaption>Cadeaux pour mamans<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></figcaption>
-        </a>
-        <a class="mosaic__item" href="cadeaux-enfants/index.html">
-          <img src="img/histoires.jpg" alt="Coffret d&#39;histoires de Noël" loading="lazy" decoding="async" width="400" height="300">
-          <figcaption>Cadeaux pour enfants<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></figcaption>
+          <div class="hero__caption">Cadeaux pour ados<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+        <a class="hero__badge" href="#categories">
+          <b>9</b>
+          <span>pièces retenues,<br>choisies une à une</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
     </div>
+
+    <a class="hero__scroll" href="#categories">
+      Défiler
+      <i aria-hidden="true"></i>
+    </a>
   </section>
 
   <nav class="quicknav" aria-label="Accès rapide par univers">

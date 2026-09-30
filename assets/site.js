@@ -40,6 +40,41 @@
     }
   }
 
+  /* --- parallaxe légère dans le héros : l'image et le filigrane bougent
+         à des vitesses différentes, ce qui crée la profondeur. Désactivé
+         si l'utilisateur préfère réduire les animations. */
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window) {
+    var hero = document.querySelector('.hero');
+    if (hero) {
+      var layers = [
+        { el: hero.querySelector('.hero__img'), f: 14 },
+        { el: hero.querySelector('.hero__star--a'), f: -10 },
+        { el: hero.querySelector('.hero__star--b'), f: -18 },
+        { el: hero.querySelector('.hero__badge'), f: 6 }
+      ].filter(function (l) { return l.el; });
+
+      var ticking = false;
+      var apply = function () {
+        ticking = false;
+        var r = hero.getBoundingClientRect();
+        if (r.bottom < -80 || r.top > window.innerHeight + 80) return;
+        var p = (r.top + r.height / 2 - window.innerHeight / 2) / window.innerHeight;
+        layers.forEach(function (l) {
+          l.el.style.transform = 'translate3d(0,' + (p * l.f).toFixed(2) + 'px,0)';
+        });
+      };
+      var onScroll = function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(apply);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      apply();
+    }
+  }
+
   var faqs = document.querySelectorAll('.faq details');
   if (faqs.length > 1) {
     for (var n = 0; n < faqs.length; n++) {
